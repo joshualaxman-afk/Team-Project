@@ -1,0 +1,50 @@
+package TeamProject;
+
+import edu.princeton.cs.algs4.StdDraw;
+
+public class Game {
+	private static boolean gameOver = false;
+	public static void main(String[] args) {
+		startGame();
+	}
+	private static void startGame() {
+		String[] level = {
+			    "###      ",
+			    "###      ",
+			    "#######  ",
+			    " ########",
+			    "    ##G  "
+			};
+
+		Board board = new Board(level, '#', 'G');
+		Block block = new Block(new Position(1, 1), board);
+		UI.init(board);
+		UI.drawScreen(block, board);
+		while (!gameOver) {
+		    if (StdDraw.hasNextKeyTyped()) {
+		         switch (StdDraw.nextKeyTyped()) {
+		            case 'w' -> block.moveUp();
+		            case 's' -> block.moveDown();
+		            case 'a' -> block.moveLeft();
+		            case 'd' -> block.moveRight();
+		        }
+		    }
+		    StdDraw.pause(20);
+		}
+	}
+	
+	public static void lostGame(){
+		gameOver=true;
+		System.out.print("Lost Game");
+		UI.loseScreen();
+	}
+	public static void wonGame() {
+		gameOver=true;
+		System.out.print("Win Game");
+		UI.winScreen();
+	}
+	
+	public static Direction[] solveBoard(Point startingPoint) {
+		return null;
+	}
+}
