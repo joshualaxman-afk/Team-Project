@@ -9,6 +9,7 @@ import edu.princeton.cs.algs4.Edge;
 import edu.princeton.cs.algs4.Graph;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.SeparateChainingHashST;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
 	private Point winPoint;
@@ -142,6 +143,8 @@ public class Board {
 				positionsToBuild.enqueue(newPosition);
 			}
 		}
+		
+StdOut.println(vertexToAdjacentVertices);
 		
 		/// Use that dynamic adjacency list and put it into a graph.
 		this.positionGraph = new Graph(vertexToAdjacentVertices.size());
