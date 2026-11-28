@@ -1,8 +1,5 @@
 package TeamProject;
 
-import edu.princeton.cs.algs4.BreadthFirstPaths;
-import edu.princeton.cs.algs4.Edge;
-import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdDraw;
 
 public class Game {

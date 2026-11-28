@@ -117,18 +117,21 @@ public class UI {
     		int width = (int)(Math.sqrt(maxOccupancy));
     		
     		// TODO
-    		double startX = ?;
-    		double startY = ?;
-    		double sizeX = ?;
-    		double sizeY = ?;
-    		double x = (currentOccupancy % width) + startX;
-    		double y = 0;
+    		double startX = (double)(currentPoint.x()) * CELL_PIXEL_SIZE;
+    		double startY = (double)(currentPoint.y()) * CELL_PIXEL_SIZE;
+    		double sizeX = (double)(CELL_PIXEL_SIZE) / width;
+    		double sizeY = (double)(CELL_PIXEL_SIZE) / (width + 1); // Add one for possible remainder.
+    		double x = ((currentOccupancy % width) * sizeX) + startX;
+    		double y = ((int)(currentOccupancy / width) * sizeY) + startY;
     		currentVertexAndDoublePoints.add(new VertexAndDoublePoint(i, x, y));
     		
     		pointToUndrawnVertexOccupants.put(currentPoint, currentOccupancy - 1);
     	}
     	
     	/// Draw dots and their corresponding lines.
-    	// TODO
+    	for(Point point : pointToVertexAndDoublePoints.keys()) {
+    		StdDraw.setPenColor(Color.MAGENTA);
+    		StdDraw.filledCircle(point.x(), point.y(), 3);
+    	}
     }
 }
