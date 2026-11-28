@@ -1,39 +1,56 @@
 package TeamProject;
 
 public class Block {
-	Board board;
-	Position pos; // Position of the block in the grid 
+	private Board board;
+	private Position position; // Position of the block in the grid
+	private final Position startingPosition;
 
-	 public Block(Position pos, Board board) {
-	        this.pos = pos;
-	        this.board = board;
-	    }
+	public Block(Position position, Board board) {
+		this.board = board;
+		this.position = position;
+		this.startingPosition = position;
+	}
 
-	    public Position getPosition() {
-	        return pos;
-	    }
+	public Position getPosition() {
+		return this.position;
+	}
+	
+	public Position getStartingPosition() {
+		return this.startingPosition;
+	}
 
-	    public void moveUp()    { move(Direction.UP); }
-	    public void moveDown()  { move(Direction.DOWN); }
-	    public void moveLeft()  { move(Direction.LEFT); }
-	    public void moveRight() { move(Direction.RIGHT); }
+	public void moveUp() {
+		this.move(Direction.UP);
+	}
 
-	    private void move(Direction direction) {
-	        this.pos = this.pos.goToDirection(direction);
-	        checkState();
-	    }
+	public void moveDown() {
+		this.move(Direction.DOWN);
+	}
 
-	    private void checkState() {
-	        if (board.isFailurePosition(pos)) {
-	            Game.lostGame();
-	            return;
-	        }
+	public void moveLeft() {
+		this.move(Direction.LEFT);
+	}
 
-	        if (board.isWinPosition(pos)) {
-	            Game.wonGame();
-	            return;
-	        }
+	public void moveRight() {
+		this.move(Direction.RIGHT);
+	}
 
-	        UI.drawScreen(this, board);
-	    }
+	private void move(Direction direction) {
+		this.position = this.position.goToDirection(direction);
+		this.checkState();
+	}
+
+	private void checkState() {
+		if (this.board.isFailurePosition(this.position)) {
+			Game.lostGame();
+			return;
+		}
+
+		if (this.board.isWinPosition(this.position)) {
+			Game.wonGame();
+			return;
+		}
+
+		UI.drawBoard(this, board);
+	}
 }
