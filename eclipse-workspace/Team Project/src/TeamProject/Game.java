@@ -19,6 +19,7 @@ public class Game {
 
 		UI.init(board);
 		UI.drawBoard(block, board);
+		UI.drawGraph(board);
 		while (!gameOver) {
 			if (StdDraw.hasNextKeyTyped()) {
 				switch (StdDraw.nextKeyTyped()) {

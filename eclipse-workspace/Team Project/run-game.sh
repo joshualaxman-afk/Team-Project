@@ -10,5 +10,5 @@ javac -cp algs4.jar -d bin src/TeamProject/*.java
 
 # NOTE: Parenthesis performs the same thing that SetLocal/EndLocal does in Batch.
 (cd bin && jar cf TeamProject/TeamProject.jar TeamProject/*.class)
-java -cp bin/TeamProject/TeamProject.jar TeamProject.Game
+java -cp algs4.jar:bin/TeamProject/TeamProject.jar TeamProject.Game
 

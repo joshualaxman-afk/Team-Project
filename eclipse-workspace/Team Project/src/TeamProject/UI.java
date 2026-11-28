@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import edu.princeton.cs.algs4.Graph;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.SeparateChainingHashST;
@@ -62,6 +63,7 @@ public class UI {
 		StdDraw.filledSquare(0, 0, 1);
 	}
 	
+	// TODO: Put all the hash tables into this record and rename it to VertexDrawInfo.
 	private static record VertexAndDoublePoint(int vertex, double x, double y) {}
 	
 	private static int findVertexInVertexAndDoublePoints(int targetVertex, ArrayList<VertexAndDoublePoint> vertexAndDoublePoints) {
@@ -79,17 +81,17 @@ public class UI {
 		
 		/// The movement logic of the game makes it so that, even in one place, multiple positions can exist, as such, they
 		/// need space to fit in the board for the graph.
-    	SeparateChainingHashST<Point, Integer> pointToVertexOccupants = new SeparateChainingHashST<>();
-    	Graph positionGraph = board.getPositionGraph();
-    	for(int i = 0; i < positionGraph.V(); i++) {
-    		Point currentPoint = Point.positionToMinPoint(board.getVertexToPosition(i));
-    		Integer originalPoints = pointToVertexOccupants.get(currentPoint);
-    		if(originalPoints == null) {
-    			originalPoints = 0;
-    		}
+		SeparateChainingHashST<Point, Integer> pointToVertexOccupants = new SeparateChainingHashST<>();
+		Graph positionGraph = board.getPositionGraph();
+	 	for(int i = 0; i < positionGraph.V(); i++) {
+	 		Point currentPoint = Point.positionToMinPoint(board.getVertexToPosition(i));
+	 		Integer originalPoints = pointToVertexOccupants.get(currentPoint);
+			if(originalPoints == null) {
+	 			originalPoints = 0;
+			}
     		
-    		pointToVertexOccupants.put(currentPoint, originalPoints + 1);
-    	}
+			pointToVertexOccupants.put(currentPoint, originalPoints + 1);
+		}
     	
     	/// In order to be able to fit multiple vertices in the same board cell, we need to be able to know how many we started out with,
     	/// and how many are left. This way, we know how to give them all equal space. In order to do this, a copy is made.
@@ -115,8 +117,7 @@ public class UI {
     		}
     		
     		int width = (int)(Math.sqrt(maxOccupancy));
-    		
-    		// TODO
+    	
     		double startX = (double)(currentPoint.x()) * CELL_PIXEL_SIZE;
     		double startY = (double)(currentPoint.y()) * CELL_PIXEL_SIZE;
     		double sizeX = (double)(CELL_PIXEL_SIZE) / width;
@@ -130,6 +131,7 @@ public class UI {
     	
     	/// Draw dots and their corresponding lines.
     	for(Point point : pointToVertexAndDoublePoints.keys()) {
+StdOut.printf("%f, %f\n", point.x(), point.y());
     		StdDraw.setPenColor(Color.MAGENTA);
     		StdDraw.filledCircle(point.x(), point.y(), 3);
     	}
